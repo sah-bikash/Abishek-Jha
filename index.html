@@ -1,499 +1,1116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Abishek Jha</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Abishek Jha — Public Health Professional</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    :root {
+      --navy: #0d2233;
+      --teal: #1a6b72;
+      --teal-light: #2a9ba5;
+      --gold: #c8913a;
+      --gold-light: #e8b86d;
+      --cream: #f7f3ee;
+      --warm-white: #fdfaf7;
+      --text-dark: #1a2535;
+      --text-mid: #4a5568;
+      --text-light: #8a99aa;
+      --border: #e2dbd2;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f4f4f4;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+    html { scroll-behavior: smooth; }
 
-        /* Header & Navigation */
-        header {
-            background: linear-gradient(135deg, #2c5f8d 0%, #1a3a52 100%);
-            color: white;
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--warm-white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(13,34,51,0.97);
+      backdrop-filter: blur(12px);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      border-bottom: 1px solid rgba(200,145,58,0.2);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: #fff;
+      letter-spacing: 0.03em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: rgba(255,255,255,0.7);
+      text-decoration: none;
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+    .hamburger span { width: 24px; height: 2px; background: #fff; transition: all 0.3s; }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--navy);
+      position: relative;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 50%, rgba(26,107,114,0.25) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 10% 80%, rgba(200,145,58,0.1) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(var(--teal-light) 1px, transparent 1px),
+                        linear-gradient(90deg, var(--teal-light) 1px, transparent 1px);
+      background-size: 60px 60px;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      padding: 120px 8% 80px;
+      max-width: 1200px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; align-items: center;
+    }
+    .hero-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem; letter-spacing: 0.2em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .hero-label::before {
+      content: ''; display: block;
+      width: 32px; height: 1px; background: var(--gold);
+    }
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 600; line-height: 1.05;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .hero-name em { color: var(--gold-light); font-style: italic; }
+    .hero-title {
+      font-size: 1rem; font-weight: 400;
+      color: rgba(255,255,255,0.6);
+      letter-spacing: 0.05em;
+      margin-bottom: 2rem;
+    }
+    .hero-title strong { color: var(--teal-light); font-weight: 500; }
+    .hero-summary {
+      font-size: 0.92rem; line-height: 1.8;
+      color: rgba(255,255,255,0.55);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-cta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 0.75rem 2rem;
+      background: var(--gold);
+      color: var(--navy);
+      font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: none; cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%);
+    }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .btn-outline {
+      padding: 0.75rem 2rem;
+      background: transparent;
+      color: rgba(255,255,255,0.8);
+      font-weight: 500; font-size: 0.85rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border: 1px solid rgba(255,255,255,0.25);
+      cursor: pointer; text-decoration: none;
+      transition: all 0.3s;
+    }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
 
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
+    /* hero right panel */
+    .hero-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 2px;
+      padding: 2.5rem;
+      backdrop-filter: blur(8px);
+      position: relative;
+    }
+    .hero-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 40px; height: 40px;
+      border-top: 2px solid var(--gold);
+      border-left: 2px solid var(--gold);
+    }
+    .hero-card::after {
+      content: '';
+      position: absolute; bottom: 0; right: 0;
+      width: 40px; height: 40px;
+      border-bottom: 2px solid var(--teal-light);
+      border-right: 2px solid var(--teal-light);
+    }
+    .stat-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-bottom: 2rem;
+    }
+    .stat-item { text-align: center; padding: 1.2rem; background: rgba(255,255,255,0.03); }
+    .stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.4rem; font-weight: 700;
+      color: var(--gold); line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-label {
+      font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.4);
+    }
+    .hero-badges {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+    }
+    .badge {
+      padding: 0.35rem 0.9rem;
+      background: rgba(26,107,114,0.25);
+      border: 1px solid rgba(42,155,165,0.3);
+      color: var(--teal-light);
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.06em;
+      border-radius: 2px;
+    }
+    .badge.gold-badge {
+      background: rgba(200,145,58,0.15);
+      border-color: rgba(200,145,58,0.3);
+      color: var(--gold-light);
+    }
+    .contact-strip {
+      display: flex; gap: 1.5rem; flex-wrap: wrap;
+      margin-top: 1.5rem; padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .contact-item {
+      font-size: 0.78rem; color: rgba(255,255,255,0.4);
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .contact-item i { color: var(--teal-light); font-size: 0.75rem; }
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-weight: 500;
-        }
+    /* ── SECTION BASE ── */
+    section { padding: 100px 8%; }
+    .section-header { margin-bottom: 4rem; }
+    .section-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem; letter-spacing: 0.2em;
+      color: var(--gold); text-transform: uppercase;
+      display: flex; align-items: center; gap: 0.7rem;
+      margin-bottom: 0.8rem;
+    }
+    .section-tag::before {
+      content: ''; width: 24px; height: 1px; background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 600; line-height: 1.1;
+      color: var(--navy);
+    }
+    .section-title em { color: var(--teal); font-style: italic; }
 
-        .nav-links a:hover {
-            color: #7fb5d9;
-        }
+    /* ── ABOUT ── */
+    #about { background: var(--cream); }
+    .about-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+    .about-text p {
+      font-size: 1rem; line-height: 1.85;
+      color: var(--text-mid);
+      margin-bottom: 1.2rem;
+    }
+    .about-text p strong { color: var(--teal); font-weight: 600; }
+    .about-details { display: flex; flex-direction: column; gap: 1.2rem; }
+    .detail-row {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--warm-white);
+      border-left: 3px solid var(--teal);
+    }
+    .detail-row i { color: var(--teal); margin-top: 3px; font-size: 0.9rem; }
+    .detail-row .d-label {
+      font-size: 0.7rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-light);
+      margin-bottom: 0.2rem;
+    }
+    .detail-row .d-value {
+      font-size: 0.9rem; font-weight: 500; color: var(--text-dark);
+    }
+    .lang-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .lang-pill {
+      font-size: 0.75rem; padding: 0.2rem 0.6rem;
+      background: var(--cream); border: 1px solid var(--border);
+      color: var(--text-mid); border-radius: 2px;
+    }
 
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, #2c5f8d 0%, #1a3a52 100%);
-            color: rgb(126, 18, 18);
-            padding: 150px 0 100px;
-            text-align: center;
-            margin-top: 60px;
-        }
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--warm-white); }
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 10px; top: 8px;
+      bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, var(--teal), var(--gold), transparent);
+    }
+    .tl-item {
+      position: relative;
+      padding: 0 0 3rem 3.5rem;
+      opacity: 0; transform: translateX(-20px);
+      transition: all 0.6s ease;
+    }
+    .tl-item.visible { opacity: 1; transform: translateX(0); }
+    .tl-dot {
+      position: absolute; left: 0; top: 8px;
+      width: 20px; height: 20px;
+      border: 2px solid var(--teal);
+      background: var(--warm-white);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1;
+    }
+    .tl-dot::after {
+      content: ''; width: 8px; height: 8px; background: var(--teal);
+    }
+    .tl-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.12em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+    .tl-org {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 0.2rem;
+    }
+    .tl-role {
+      font-size: 0.82rem; color: var(--teal);
+      font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; margin-bottom: 0.8rem;
+    }
+    .tl-desc { font-size: 0.88rem; color: var(--text-mid); line-height: 1.75; }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.8rem; }
+    .tl-tag {
+      font-size: 0.7rem; padding: 0.2rem 0.65rem;
+      background: rgba(26,107,114,0.08);
+      border: 1px solid rgba(26,107,114,0.2);
+      color: var(--teal); border-radius: 1px;
+    }
 
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
-        }
+    /* ── EDUCATION ── */
+    #education { background: var(--navy); }
+    #education .section-title { color: #fff; }
+    .edu-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .edu-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem;
+      position: relative;
+      transition: all 0.3s;
+      opacity: 0; transform: translateY(20px);
+    }
+    .edu-card.visible { opacity: 1; transform: translateY(0); }
+    .edu-card:hover {
+      border-color: rgba(200,145,58,0.4);
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-4px);
+    }
+    .edu-card .edu-level {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.18em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .edu-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: #fff; margin-bottom: 0.5rem;
+    }
+    .edu-card .edu-inst {
+      font-size: 0.82rem; color: rgba(255,255,255,0.5);
+      margin-bottom: 1rem; line-height: 1.4;
+    }
+    .edu-card .edu-gpa {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 700;
+      color: var(--teal-light);
+    }
+    .edu-card .edu-gpa-label {
+      font-size: 0.68rem; color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em; text-transform: uppercase;
+    }
+    .edu-card .edu-year {
+      position: absolute; top: 1.5rem; right: 1.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem; color: rgba(255,255,255,0.25);
+    }
 
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            opacity: 0.9;
-        }
+    /* ── SKILLS ── */
+    #skills { background: var(--cream); }
+    .skills-layout {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+    }
+    .skills-col h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; color: var(--navy);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-item { margin-bottom: 1.2rem; }
+    .skill-top {
+      display: flex; justify-content: space-between;
+      font-size: 0.82rem; color: var(--text-mid);
+      margin-bottom: 0.4rem; font-weight: 500;
+    }
+    .skill-bar {
+      height: 3px; background: var(--border);
+      position: relative; overflow: hidden;
+    }
+    .skill-bar-fill {
+      position: absolute; top: 0; left: 0;
+      height: 100%; background: linear-gradient(90deg, var(--teal), var(--teal-light));
+      width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1);
+    }
+    .competency-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+    .comp-item {
+      display: flex; align-items: center; gap: 0.7rem;
+      padding: 0.8rem 1rem;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      font-size: 0.82rem; color: var(--text-mid);
+      transition: all 0.2s;
+    }
+    .comp-item:hover { border-color: var(--teal); color: var(--teal); }
+    .comp-item i { color: var(--teal-light); font-size: 0.8rem; }
 
-        .hero .tagline {
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 2rem;
-        }
+    /* ── PROJECTS ── */
+    #projects { background: var(--warm-white); }
+    .projects-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .project-card {
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 2.5rem;
+      position: relative; overflow: hidden;
+      transition: all 0.3s;
+      opacity: 0; transform: translateY(20px);
+    }
+    .project-card.visible { opacity: 1; transform: translateY(0); }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--gold));
+    }
+    .project-card:hover { box-shadow: 0 20px 60px rgba(0,0,0,0.08); transform: translateY(-4px); }
+    .project-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem; letter-spacing: 0.15em;
+      color: var(--gold); text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+    .project-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; font-weight: 600;
+      color: var(--navy); margin-bottom: 0.8rem; line-height: 1.3;
+    }
+    .project-card p {
+      font-size: 0.85rem; color: var(--text-mid);
+      line-height: 1.7; margin-bottom: 1.2rem;
+    }
+    .project-meta {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+    }
+    .meta-tag {
+      font-size: 0.72rem; padding: 0.25rem 0.7rem;
+      background: rgba(26,107,114,0.1);
+      color: var(--teal); border-radius: 1px;
+    }
 
-        .hero .location {
-            font-size: 1rem;
-            opacity: 0.7;
-            margin-bottom: 2rem;
-        }
+    /* ── CERTIFICATES ── */
+    #certificates { background: var(--navy); }
+    #certificates .section-title { color: #fff; }
+    .certs-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 1.2rem;
+    }
+    .cert-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      transition: all 0.3s;
+      opacity: 0; transform: scale(0.95);
+    }
+    .cert-card.visible { opacity: 1; transform: scale(1); }
+    .cert-card:hover {
+      background: rgba(200,145,58,0.1);
+      border-color: rgba(200,145,58,0.3);
+      transform: translateY(-4px);
+    }
+    .cert-icon {
+      width: 48px; height: 48px;
+      margin: 0 auto 1rem;
+      background: rgba(200,145,58,0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cert-icon i { color: var(--gold); font-size: 1.2rem; }
+    .cert-card h4 {
+      font-size: 0.85rem; font-weight: 600;
+      color: #fff; margin-bottom: 0.4rem; line-height: 1.4;
+    }
+    .cert-card p { font-size: 0.75rem; color: rgba(255,255,255,0.35); }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background: white;
-            color: #2c5f8d;
-            text-decoration: none;
-            border-radius: 5px;
-            font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+    /* ── CONTACT ── */
+    #contact { background: var(--cream); }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 5rem; align-items: start;
+    }
+    .contact-info p {
+      font-size: 0.95rem; line-height: 1.8;
+      color: var(--text-mid); margin-bottom: 2rem;
+    }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.2rem;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      transition: all 0.2s; color: var(--text-dark);
+    }
+    .contact-link:hover { border-color: var(--teal); }
+    .contact-link .cl-icon {
+      width: 38px; height: 38px;
+      background: rgba(26,107,114,0.1);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-link .cl-icon i { color: var(--teal); font-size: 0.9rem; }
+    .contact-link .cl-text .cl-type {
+      font-size: 0.68rem; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--text-light);
+      margin-bottom: 0.15rem;
+    }
+    .contact-link .cl-text .cl-val {
+      font-size: 0.88rem; font-weight: 500;
+    }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label {
+      font-size: 0.72rem; text-transform: uppercase;
+      letter-spacing: 0.1em; color: var(--text-light);
+    }
+    .form-group input,
+    .form-group textarea {
+      padding: 0.8rem 1rem;
+      background: var(--warm-white);
+      border: 1px solid var(--border);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem; color: var(--text-dark);
+      outline: none; transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color: var(--teal); }
+    .form-group textarea { min-height: 120px; }
+    .btn-send {
+      padding: 0.85rem 2rem;
+      background: var(--teal);
+      color: #fff; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      transition: all 0.3s;
+      align-self: flex-start;
+    }
+    .btn-send:hover { background: var(--teal-light); transform: translateY(-2px); }
 
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy);
+      padding: 3rem 8%;
+      display: flex; align-items: center; justify-content: space-between;
+      border-top: 1px solid rgba(200,145,58,0.2);
+    }
+    .footer-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem; color: #fff; font-weight: 600;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-text {
+      font-size: 0.78rem; color: rgba(255,255,255,0.3);
+      text-align: center;
+    }
+    .footer-social { display: flex; gap: 0.8rem; }
+    .social-btn {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: all 0.2s; font-size: 0.85rem;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); }
 
-        /* Sections */
-        section {
-            padding: 80px 0;
-            background: white;
-        }
+    /* ── SCROLL REVEAL ── */
+    .reveal {
+      opacity: 0; transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        section:nth-child(even) {
-            background: #f9f9f9;
-        }
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; padding: 100px 6% 60px; }
+      .hero-card { display: none; }
+      .about-grid,
+      .contact-grid,
+      .skills-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .edu-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: 1fr 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1.5rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 70px 5%; }
+      .certs-grid { grid-template-columns: 1fr; }
+    }
 
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            color: #2c5f8d;
-            position: relative;
-        }
+    /* ── HERO ENTRANCE ANIMATION ── */
+    .hero-label { animation: fadeUp 0.8s 0.2s both; }
+    .hero-name { animation: fadeUp 0.8s 0.4s both; }
+    .hero-title { animation: fadeUp 0.8s 0.55s both; }
+    .hero-summary { animation: fadeUp 0.8s 0.7s both; }
+    .hero-cta { animation: fadeUp 0.8s 0.85s both; }
+    .hero-card { animation: fadeIn 1s 1s both; }
 
-        h2::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: #2c5f8d;
-            margin: 20px auto 0;
-        }
-
-        /* About Section */
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        /* Education Section */
-        .education-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            max-width: 700px;
-            margin: 0 auto;
-            border-left: 5px solid #2c5f8d;
-        }
-
-        .education-card h3 {
-            color: #2c5f8d;
-            font-size: 1.8rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-card .university {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 0.5rem;
-        }
-
-        .education-card .year {
-            color: #888;
-            margin-bottom: 1rem;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-category h3 {
-            color: #2c5f8d;
-            margin-bottom: 1rem;
-            font-size: 1.3rem;
-        }
-
-        .skill-category ul {
-            list-style: none;
-        }
-
-        .skill-category li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .skill-category li:last-child {
-            border-bottom: none;
-        }
-
-        .skill-category li::before {
-            content: "✓ ";
-            color: #2c5f8d;
-            font-weight: bold;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .project-card h3 {
-            color: #2c5f8d;
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Contact Section */
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            font-size: 1.1rem;
-        }
-
-        .contact-item svg {
-            width: 24px;
-            height: 24px;
-            fill: #2c5f8d;
-        }
-
-        /* Footer */
-        footer {
-            background: #1a3a52;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .nav-links {
-                gap: 1rem;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-        }
-    </style>
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">Abishek Jha</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section id="home" class="hero">
-        <div class="container">
-            <h1>Abishek Jha</h1>
-            <p class="subtitle">Bachelor of Public Health</p>
-            <p class="tagline">Committed to Improving Community Health & Well-being</p>
-            <p class="location">📍 Nepal</p>
-            <a href="#contact" class="btn">Get In Touch</a>
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Abishek <span>Jha</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-label">NHPC Registered Professional</div>
+        <h1 class="hero-name">Abishek<br><em>Jha</em></h1>
+        <p class="hero-title"><strong>Bachelor of Public Health</strong> · Community Health · Research · Education</p>
+        <p class="hero-summary">
+          A passionate public health professional from Nepal with expertise in community health research, data analysis, and health education. Dedicated to bridging the gap between evidence-based practice and grassroots community impact.
+        </p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary">Get In Touch</a>
+          <a href="#projects" class="btn-outline">View Projects</a>
         </div>
-    </section>
+        <div class="contact-strip">
+          <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Janakpurdham, Nepal</div>
+          <div class="contact-item"><i class="fas fa-envelope"></i> akj4746@gmail.com</div>
+          <div class="contact-item"><i class="fas fa-phone"></i> 9800840498</div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="stat-grid">
+          <div class="stat-item">
+            <div class="stat-num">3.66</div>
+            <div class="stat-label">BPH CGPA</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5+</div>
+            <div class="stat-label">Field Programs</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4</div>
+            <div class="stat-label">Certifications</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5</div>
+            <div class="stat-label">Languages</div>
+          </div>
+        </div>
+        <div class="hero-badges">
+          <span class="badge gold-badge">NHPC Registered</span>
+          <span class="badge">Community Health</span>
+          <span class="badge">Data Analysis</span>
+          <span class="badge">Health Education</span>
+          <span class="badge">Field Research</span>
+          <span class="badge">SPSS</span>
+          <span class="badge">Kobo Toolbox</span>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section id="about">
-        <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <p>I am a passionate public health professional with a Bachelor's degree in Public Health from Nepal. My education has equipped me with comprehensive knowledge in epidemiology, health promotion, disease prevention, and community health management.</p>
-                <p style="margin-top: 1rem;">I am dedicated to addressing health disparities and improving healthcare access in underserved communities. Through evidence-based interventions and community engagement, I strive to make a meaningful impact on population health.</p>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-header reveal">
+      <div class="section-tag">Who I Am</div>
+      <h2 class="section-title">About <em>Me</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I am a <strong>Bachelor of Public Health (BPH)</strong> graduate and NHPC-registered public health professional based in Nepal. My work centers on community health research, evidence-based health programming, and health education.</p>
+        <p>With hands-on experience conducting <strong>community health diagnoses</strong>, analyzing public health data, and delivering school health programs, I am committed to improving population health outcomes through research and community engagement.</p>
+        <p>I am equally passionate about <strong>teaching and mentoring</strong> — having facilitated sessions on communicable diseases, hygiene practices, and community awareness for students and community members alike.</p>
+        <p>Currently expanding my knowledge through WHO e-learning courses on <strong>AMR and Rabies Awareness</strong>, and volunteering with Youth Activism Nepal to advocate for health equity.</p>
+      </div>
+      <div class="about-details reveal">
+        <div class="detail-row">
+          <i class="fas fa-user-graduate"></i>
+          <div>
+            <div class="d-label">Qualification</div>
+            <div class="d-value">Bachelor of Public Health (BPH)</div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <i class="fas fa-id-card"></i>
+          <div>
+            <div class="d-label">Registration</div>
+            <div class="d-value">NHPC Registered Public Health Professional</div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <i class="fas fa-map-marker-alt"></i>
+          <div>
+            <div class="d-label">Location</div>
+            <div class="d-value">Janakpurdham, Province 2, Nepal</div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <i class="fas fa-globe"></i>
+          <div>
+            <div class="d-label">Website</div>
+            <div class="d-value">abishekjha.com.np</div>
+          </div>
+        </div>
+        <div class="detail-row">
+          <i class="fas fa-language"></i>
+          <div>
+            <div class="d-label">Languages</div>
+            <div class="lang-pills">
+              <span class="lang-pill">English</span>
+              <span class="lang-pill">Nepali</span>
+              <span class="lang-pill">Maithili</span>
+              <span class="lang-pill">Bhojpuri</span>
+              <span class="lang-pill">Hindi</span>
             </div>
+          </div>
         </div>
-    </section>
+        <div class="detail-row">
+          <i class="fas fa-heart"></i>
+          <div>
+            <div class="d-label">Interests</div>
+            <div class="d-value">Research · Teaching · Community Health Programs</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <section id="education">
-        <div class="container">
-            <h2>Education</h2>
-            <div class="education-card">
-                <h3>Bachelor of Public Health (BPH)</h3>
-                <p class="university">Purbanchal University, Nepal</p>
-                <p class="year">Year of Graduation: 2026</p>
-                <p>Comprehensive study of public health principles including epidemiology, biostatistics, health policy, environmental health, and community health sciences. Completed fieldwork and research projects focused on prevalent health issues in Nepali communities.</p>
+  <!-- EXPERIENCE -->
+  <section id="experience">
+    <div class="section-header reveal">
+      <div class="section-tag">Career Journey</div>
+      <h2 class="section-title">Professional <em>Experience</em></h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">March 2025 — March 2026</div>
+        <div class="tl-org">Youth Activism Nepal</div>
+        <div class="tl-role">Volunteer</div>
+        <p class="tl-desc">Contributed to youth-led health advocacy initiatives, community awareness campaigns, and health promotion activities across Kathmandu. Supported grassroots mobilization for public health equity.</p>
+        <div class="tl-tags">
+          <span class="tl-tag">Health Advocacy</span>
+          <span class="tl-tag">Community Mobilization</span>
+          <span class="tl-tag">Youth Leadership</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">August 2025 — October 2025</div>
+        <div class="tl-org">Teaching Experience</div>
+        <div class="tl-role">Tutor & Health Educator</div>
+        <p class="tl-desc">Delivered structured sessions on communicable diseases, hygiene practices, and preventive health under the School Health Program. Provided tuition to secondary-level students and assisted in community-level health education during field practice.</p>
+        <div class="tl-tags">
+          <span class="tl-tag">Health Education</span>
+          <span class="tl-tag">School Health</span>
+          <span class="tl-tag">Curriculum Delivery</span>
+          <span class="tl-tag">Community Outreach</span>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-date">January 2025 — February 2025</div>
+        <div class="tl-org">New Era</div>
+        <div class="tl-role">Research Intern</div>
+        <p class="tl-desc">Contributed to research operations at one of Nepal's leading research institutions. Responsibilities included content modification, data analysis, transcription, and translation — gaining hands-on experience with professional research workflows.</p>
+        <div class="tl-tags">
+          <span class="tl-tag">Data Analysis</span>
+          <span class="tl-tag">Content Modification</span>
+          <span class="tl-tag">Transcription</span>
+          <span class="tl-tag">Translation</span>
+          <span class="tl-tag">Research Methods</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="section-header reveal">
+      <div class="section-tag">Academic Background</div>
+      <h2 class="section-title" style="color:#fff">Educational <em>Journey</em></h2>
+    </div>
+    <div class="edu-grid">
+      <div class="edu-card">
+        <div class="edu-year">2021 – 2025</div>
+        <div class="edu-level">Undergraduate</div>
+        <h3>Bachelor of Public Health</h3>
+        <p class="edu-inst">Little Buddha College of Health Science<br>Kathmandu, Nepal</p>
+        <div class="edu-gpa">3.66</div>
+        <div class="edu-gpa-label">CGPA</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2017 – 2019</div>
+        <div class="edu-level">Higher Secondary (NEB +2)</div>
+        <h3>Science Stream</h3>
+        <p class="edu-inst">Mithila Institute of Technology (MIT)<br>Janakpurdham, Nepal</p>
+        <div class="edu-gpa">2.95</div>
+        <div class="edu-gpa-label">CGPA</div>
+      </div>
+      <div class="edu-card">
+        <div class="edu-year">2017</div>
+        <div class="edu-level">School Leaving Certificate (SEE)</div>
+        <h3>Secondary Education</h3>
+        <p class="edu-inst">Shree Ram Janaki Secondary Boarding School<br>Janakpurdham, Nepal</p>
+        <div class="edu-gpa">3.65</div>
+        <div class="edu-gpa-label">GPA</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="section-header reveal">
+      <div class="section-tag">Expertise</div>
+      <h2 class="section-title">Skills &amp; <em>Competencies</em></h2>
+    </div>
+    <div class="skills-layout">
+      <div class="skills-col reveal">
+        <h3>Technical Tools</h3>
+        <div class="skill-item">
+          <div class="skill-top"><span>SPSS (Statistical Analysis)</span><span>85%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-width="85"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span>MS Excel / Data Management</span><span>88%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-width="88"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span>Kobo Toolbox / Google Forms</span><span>90%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-width="90"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span>WHO Anthro Software</span><span>80%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-width="80"></div></div>
+        </div>
+        <div class="skill-item">
+          <div class="skill-top"><span>MS Word / PowerPoint</span><span>92%</span></div>
+          <div class="skill-bar"><div class="skill-bar-fill" data-width="92"></div></div>
+        </div>
+      </div>
+      <div class="skills-col reveal">
+        <h3>Core Competencies</h3>
+        <div class="competency-grid">
+          <div class="comp-item"><i class="fas fa-chalkboard-teacher"></i> Teaching & Presentation</div>
+          <div class="comp-item"><i class="fas fa-chart-bar"></i> Data Analysis</div>
+          <div class="comp-item"><i class="fas fa-clipboard-list"></i> Data Collection & Survey</div>
+          <div class="comp-item"><i class="fas fa-file-alt"></i> Report Writing</div>
+          <div class="comp-item"><i class="fas fa-comments"></i> Communication</div>
+          <div class="comp-item"><i class="fas fa-users"></i> Team Leadership</div>
+          <div class="comp-item"><i class="fas fa-hands-helping"></i> Community Facilitation</div>
+          <div class="comp-item"><i class="fas fa-microscope"></i> Field Research</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-header reveal">
+      <div class="section-tag">Field Work & Research</div>
+      <h2 class="section-title">Projects &amp; <em>Field Practice</em></h2>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-type">Research Study · 2025</div>
+        <h3>Nutritional Status of Under-Five Children in Pipara Rural Municipality</h3>
+        <p>A field-based research study assessing the nutritional status of children under five years in Pipara Rural Municipality. Applied anthropometric measurements and WHO Anthro software for data collection and analysis, contributing to evidence-based nutritional interventions at the community level.</p>
+        <div class="project-meta">
+          <span class="meta-tag">WHO Anthro</span>
+          <span class="meta-tag">SPSS</span>
+          <span class="meta-tag">Field Research</span>
+          <span class="meta-tag">Nutrition</span>
+        </div>
+      </div>
+      <div class="project-card">
+        <div class="project-type">Field Practice · Group Sub-Leader</div>
+        <h3>Community Health Diagnosis &amp; District Field Practice</h3>
+        <p>Conducted a comprehensive community health diagnosis as part of district-level field practice. Served as Group Sub-Leader, coordinating team activities including household surveys, data collection, and community health assessments to identify priority health issues and determinants.</p>
+        <div class="project-meta">
+          <span class="meta-tag">Community Diagnosis</span>
+          <span class="meta-tag">Kobo Toolbox</span>
+          <span class="meta-tag">Leadership</span>
+          <span class="meta-tag">Data Collection</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES -->
+  <section id="certificates">
+    <div class="section-header reveal">
+      <div class="section-tag">Credentials</div>
+      <h2 class="section-title" style="color:#fff">Certificates &amp; <em>Courses</em></h2>
+    </div>
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-id-badge"></i></div>
+        <h4>Registered Public Health Professional</h4>
+        <p>Nepal Health Professional Council (NHPC)</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-flask"></i></div>
+        <h4>Research Internship Certificate</h4>
+        <p>New Era, Kathmandu</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-bug"></i></div>
+        <h4>Dengue Search &amp; Destroy Program</h4>
+        <p>Participation Certificate</p>
+      </div>
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fas fa-hands-helping"></i></div>
+        <h4>Volunteer Certificate</h4>
+        <p>Youth's Activism Nepal</p>
+      </div>
+    </div>
+    <!-- WHO Course -->
+    <div style="margin-top: 2rem; padding: 1.8rem 2rem; background: rgba(26,107,114,0.15); border: 1px solid rgba(42,155,165,0.3); display:flex; align-items:center; gap:1.5rem;" class="reveal">
+      <div style="width:48px;height:48px;background:rgba(42,155,165,0.2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <i class="fas fa-globe" style="color:var(--teal-light);font-size:1.2rem;"></i>
+      </div>
+      <div>
+        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.15em;color:var(--teal-light);text-transform:uppercase;margin-bottom:0.3rem;">WHO E-Learning Course</div>
+        <div style="color:#fff;font-weight:600;font-size:0.95rem;">AMR and Rabies Awareness</div>
+        <div style="color:rgba(255,255,255,0.4);font-size:0.78rem;margin-top:0.2rem;">World Health Organization</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-header reveal">
+      <div class="section-tag">Let's Connect</div>
+      <h2 class="section-title">Get In <em>Touch</em></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal">
+        <p>Whether you're looking to collaborate on public health research, need a passionate educator, or want to discuss community health initiatives — I'd love to connect.</p>
+        <div class="contact-links">
+          <a href="mailto:akj4746@gmail.com" class="contact-link">
+            <div class="cl-icon"><i class="fas fa-envelope"></i></div>
+            <div class="cl-text">
+              <div class="cl-type">Email</div>
+              <div class="cl-val">akj4746@gmail.com</div>
             </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
-            <h2>Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Core Public Health</h3>
-                    <ul>
-                        <li>Epidemiology & Disease Surveillance</li>
-                        <li>Health Promotion & Education</li>
-                        <li>Community Health Assessment</li>
-                        <li>Program Planning & Evaluation</li>
-                        <li>Health Policy Analysis</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Research & Analysis</h3>
-                    <ul>
-                        <li>Biostatistics</li>
-                        <li>Qualitative & Quantitative Research</li>
-                        <li>Data Collection & Analysis</li>
-                        <li>SPSS / Statistical Software</li>
-                        <li>Research Report Writing</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Specialized Areas</h3>
-                    <ul>
-                        <li>Maternal & Child Health</li>
-                        <li>Infectious Disease Control</li>
-                        <li>Environmental Health</li>
-                        <li>Nutrition & Food Safety</li>
-                        <li>Emergency Preparedness</li>
-                    </ul>
-                </div>
-                <div class="skill-category">
-                    <h3>Professional Skills</h3>
-                    <ul>
-                        <li>Community Engagement</li>
-                        <li>Health Communication</li>
-                        <li>Project Management</li>
-                        <li>Team Collaboration</li>
-                        <li>Nepali & English Proficiency</li>
-                    </ul>
-                </div>
+          </a>
+          <a href="tel:9800840498" class="contact-link">
+            <div class="cl-icon"><i class="fas fa-phone"></i></div>
+            <div class="cl-text">
+              <div class="cl-type">Phone</div>
+              <div class="cl-val">+977 9800840498</div>
             </div>
-        </div>
-    </section>
-
-    <section id="projects">
-        <div class="container">
-            <h2>Projects & Experience</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3>Community Health Survey</h3>
-                    <p>Conducted a comprehensive health needs assessment in rural communities, identifying key health challenges and developing targeted intervention strategies for improving healthcare access.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Health Education Campaign</h3>
-                    <p>Designed and implemented health awareness programs focusing on maternal and child health, sanitation, and nutrition in collaboration with local health posts.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Disease Surveillance Research</h3>
-                    <p>Participated in epidemiological research analyzing disease patterns and risk factors in vulnerable populations, contributing to evidence-based public health interventions.</p>
-                </div>
-                <div class="project-card">
-                    <h3>Field Practicum</h3>
-                    <p>Completed hands-on fieldwork with NGOs and health organizations, gaining practical experience in community health programs and health service delivery.</p>
-                </div>
+          </a>
+          <a href="https://linkedin.com/in/abishekjha" target="_blank" class="contact-link">
+            <div class="cl-icon"><i class="fab fa-linkedin-in"></i></div>
+            <div class="cl-text">
+              <div class="cl-type">LinkedIn</div>
+              <div class="cl-val">linkedin.com/in/abishekjha</div>
             </div>
-        </div>
-    </section>
-
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Me</h2>
-            <div class="contact-content">
-                <p>I'm open to opportunities in public health, research, and community development. Let's connect!</p>
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                        </svg>
-                        <span>your.email@example.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                        </svg>
-                        <span>+977-XXX-XXXXXXX</span>
-                    </div>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-                        </svg>
-                        <span>Kathmandu, Nepal</span>
-                    </div>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                        </svg>
-                        <span>LinkedIn Profile</span>
-                    </div>
-                </div>
+          </a>
+          <a href="https://abishekjha.com.np" target="_blank" class="contact-link">
+            <div class="cl-icon"><i class="fas fa-globe"></i></div>
+            <div class="cl-text">
+              <div class="cl-type">Website</div>
+              <div class="cl-val">abishekjha.com.np</div>
             </div>
+          </a>
         </div>
-    </section>
-
-    <footer>
-        <div class="container">
-            <p>&copy; 2026 Abishek Jha. Dedicated to Building Healthier Communities.</p>
+      </div>
+      <div class="reveal">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Your Name</label>
+              <input type="text" placeholder="Full Name" />
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input type="email" placeholder="email@example.com" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Subject</label>
+            <input type="text" placeholder="How can I help?" />
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Write your message here..."></textarea>
+          </div>
+          <button class="btn-send">Send Message <i class="fas fa-arrow-right" style="margin-left:0.5rem;"></i></button>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-    </script>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Abishek <span>Jha</span></div>
+    <div class="footer-text">© 2025 Abishek Jha · Public Health Professional · Janakpurdham, Nepal</div>
+    <div class="footer-social">
+      <a href="mailto:akj4746@gmail.com" class="social-btn"><i class="fas fa-envelope"></i></a>
+      <a href="https://linkedin.com/in/abishekjha" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="tel:9800840498" class="social-btn"><i class="fas fa-phone"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          // Trigger skill bars
+          e.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width + '%';
+          });
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal, .tl-item, .edu-card, .project-card, .cert-card').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Stagger timeline items
+    document.querySelectorAll('.tl-item').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.15) + 's';
+    });
+    document.querySelectorAll('.edu-card').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.12) + 's';
+    });
+    document.querySelectorAll('.cert-card').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.1) + 's';
+    });
+    document.querySelectorAll('.project-card').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.12) + 's';
+    });
+
+    // Mobile menu
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+      links.style.flexDirection = 'column';
+      links.style.position = 'absolute';
+      links.style.top = '64px';
+      links.style.left = '0';
+      links.style.width = '100%';
+      links.style.background = 'rgba(13,34,51,0.98)';
+      links.style.padding = '1.5rem 5%';
+      links.style.gap = '1.2rem';
+    }
+
+    // Active nav on scroll
+    const sections = document.querySelectorAll('section[id]');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 80) current = s.id;
+      });
+      document.querySelectorAll('.nav-links a').forEach(a => {
+        a.style.color = a.getAttribute('href') === '#' + current
+          ? 'var(--gold-light)' : '';
+      });
+    });
+  </script>
 </body>
 </html>
